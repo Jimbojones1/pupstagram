@@ -53,7 +53,7 @@ export default function FeedPage({loggedUser, handleLogout}) {
 
 		// This is going to express to get the posts
 		// so this is the start of loading
-	  setLoading(true)
+
       const response = await fetch("/api/posts", {
         method: "GET",
         headers: {

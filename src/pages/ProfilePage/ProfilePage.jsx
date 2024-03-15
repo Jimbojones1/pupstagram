@@ -10,6 +10,7 @@ import Header from "../../components/Header/Header";
 import tokenService from "../../utils/tokenService";
 import PostFeed from "../../components/PostFeed/PostFeed";
 
+
 export default function ProfilePage({ loggedUser, handleLogout }) {
   const [posts, setPosts] = useState([]);
   const [profileUser, setProfileUser] = useState({});
@@ -29,7 +30,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
 
   async function getProfileInfo() {
     try {
-      setLoading(true);
+      
       const response = await fetch(`/api/users/${username}`, {
         method: "GET",
         headers: {
@@ -54,6 +55,50 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
       console.log(err.message);
       setError("Profile Does Not Exist! Check the Terminal!");
       setLoading(false);
+    }
+  }
+
+  async function addLike(postId){ // postId comes from the card component
+    // where we call this function
+    try {
+      const response = await fetch(`/api/posts/${postId}/likes`, {
+        method: 'POST',
+        headers: {
+          // convention for sending jwts in a fetch request
+          Authorization: "Bearer " + tokenService.getToken(),
+          // We send the token, so the server knows who is making the
+          // request
+        }
+      })
+
+      const data = await response.json();
+      console.log(data, ' response from addLike')
+      getProfileInfo(); // Refetch the posts, which updates the state, 
+      // the post will now have the user in inside of the 
+      // post.likes array
+    } catch(err){
+      console.log(err)
+    }
+  }
+
+  async function removeLike(likeId){
+    try {
+      const response = await fetch(`/api/likes/${likeId}`, {
+        method: 'DELETE',
+        headers: {
+          // convention for sending jwts in a fetch request
+          Authorization: "Bearer " + tokenService.getToken(),
+          // We send the token, so the server knows who is making the
+          // request
+        } 
+      })
+
+      const data = await response.json()
+      console.log(data, ' response from delete like')
+      getProfileInfo(); // call getPosts to sync you data and update state
+      // so the like is removed from the array 
+    } catch(err){
+      console.log(err)
     }
   }
 
@@ -89,7 +134,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
       </Grid.Row>
       <Grid.Row centered>
         <Grid.Column style={{ maxWidth: 750 }}>
-         <PostFeed itemsPerRow={3} isProfile={true} posts={posts}/> 
+         <PostFeed itemsPerRow={3} isProfile={true} posts={posts} addLike={addLike} removeLike={removeLike} loggedUser={loggedUser}/> 
         
         </Grid.Column>
       </Grid.Row>
