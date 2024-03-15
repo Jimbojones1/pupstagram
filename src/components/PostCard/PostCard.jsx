@@ -2,7 +2,10 @@ import { Card, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 
-export default function PostCard({ post, isProfile, addLike, removeLike }) {
+export default function PostCard({ post, isProfile, addLike, removeLike, loggedUser }) {
+
+  // if the logged in User's is in the post.likes array 
+
   return (
     <Card>
       {isProfile ? null : (
