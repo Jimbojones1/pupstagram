@@ -124,7 +124,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
     <Grid>
       <Grid.Row>
         <Grid.Column>
-          <Header loggedUser={loggedUser} handleLogout={handleLogout} />
+          <Header handleLogout={handleLogout} />
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
@@ -134,7 +134,7 @@ export default function ProfilePage({ loggedUser, handleLogout }) {
       </Grid.Row>
       <Grid.Row centered>
         <Grid.Column style={{ maxWidth: 750 }}>
-         <PostFeed itemsPerRow={3} isProfile={true} posts={posts} addLike={addLike} removeLike={removeLike} loggedUser={loggedUser}/> 
+         <PostFeed itemsPerRow={3} isProfile={true} posts={posts} addLike={addLike} removeLike={removeLike} /> 
         
         </Grid.Column>
       </Grid.Row>

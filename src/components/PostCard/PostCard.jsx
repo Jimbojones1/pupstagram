@@ -1,9 +1,14 @@
 import { Card, Icon, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { useLoggedUser } from "../../contexts/UserContext";
 
 
+export default function PostCard({ post, isProfile, addLike, removeLike }) {
+   
+  const loggedUser = useLoggedUser();  // < this is the custom hook from the context api!
+  // NOTICE: You're no longer passing a prop called loggedUser from the app
+  // through the profile page and feed page!
 
-export default function PostCard({ post, isProfile, addLike, removeLike, loggedUser }) {
 
   // if the logged in User's is in the post.likes array 
   // loggedUser has Liked the post 

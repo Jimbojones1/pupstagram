@@ -1,8 +1,12 @@
 import { Header, Segment, Image, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { useLoggedUser } from "../../contexts/UserContext";
 
-export default function PageHeader({ loggedUser, handleLogout }) {
+export default function PageHeader({ handleLogout }) {
     console.log(handleLogout)
+      // This is using our hook from the context api! to get the logged 
+  // in user from the app component!
+  const loggedUser = useLoggedUser()
   return (
     <Segment clearing>
       <Header as="h2" floated="right">
