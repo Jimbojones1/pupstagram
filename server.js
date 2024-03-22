@@ -43,7 +43,7 @@ if(process.env.IS_PRODUCTION){
       res.render(path.join(__dirname, 'dist', 'index.ejs'), {manifest});
     });
   }
-  
+  console.log('something')
   // This is the catch all when the code is running locally
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, './','index.html'));
