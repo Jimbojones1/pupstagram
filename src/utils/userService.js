@@ -51,3 +51,18 @@ export default {
   logout,
   login
 };
+
+
+ async function show(req, res){
+  try {
+    // find the cart by the userId property on the CartModel
+    // req.user comes from the jwt token sent from the react side
+    const cart = await CartModel.findOne({userId: req.user._id});
+    // respond back to react with the cart
+    
+    res.json({cart})
+  } catch(err){
+    console.log(err);
+    res.json({err});
+  }
+ }

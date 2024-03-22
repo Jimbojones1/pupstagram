@@ -8,6 +8,7 @@ const likesSchema = mongoose.Schema({
 });
 
 
+
 // One a user has many posts 
 // A post belongs to a User
 const postSchema = new mongoose.Schema({

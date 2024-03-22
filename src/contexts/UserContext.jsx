@@ -8,10 +8,10 @@ export const UserContext = createContext(null);
 export function UserProvider({children, loggedUser}){
 	console.log(loggedUser, 'in userProvide')
 	// Chilren is whatever your component is that you are rendering!
-	// The UserProvider is being used in the Layout Page, If not using it you can 
+	// The UserProvider is being used in the, If not using it you can 
 	// wrap your routes in it in the app.js, this will provide the value
 	// to all the components it is being rendered by (notice we still have to 
-	// pass the loggedUsing down to the layout)
+	// pass the loggedUsing down)
 	return (
 		<UserContext.Provider value={loggedUser}>
 			{children}

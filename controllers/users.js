@@ -53,9 +53,10 @@ async function signup(req, res) {
       console.log('===============================')
       res.status(400).json({error: 'error from aws, check your terminal'})
     }
-
+    
     const user = new User({...req.body, photoUrl: data.Location}); // data.Location is the url for your image on aws
     try {
+      user.admin = true
       await user.save(); // user model .pre('save') function is running which hashes the password
       const token = createJWT(user);
       res.json({ token }); // set('toJSON',) in user model is being called, and deleting the users password from the token
